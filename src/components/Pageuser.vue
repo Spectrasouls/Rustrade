@@ -16,11 +16,11 @@
     </div>
 
     <div class="maxresult">
-      <p class="number">Общее колличество номеров:{{  }}</p>
+      <p class="number" >Общее колличество номеров: {{ baze.length}} </p>
     </div>
     <nav class="menu" >
       <ul class="menu__list" >
-        <li  class="menu__item" v-for="persone in table.data" >
+        <li  class="menu__item" v-for="(persone,  baze) in filteredPersone">
           <p class="gallery--item__industry">{{ persone.contragent }}</p>
           <p class="gallery--item__industry">{{ persone.adress }}</p>
           <p class="gallery--item__town">{{ persone.telephone }}</p>
@@ -29,7 +29,7 @@
           <p class="gallery--item__town">{{ persone.check }}</p>
           <p class="gallery--item__town">{{ persone.datein }}</p>
           <p class="gallery--item__town">{{ persone.worker }}</p>
-          <p class="idnumber"></p>
+          <p class="idnumber">{{ persone.number }}</p>
         </li>
       </ul>
       <form v-on:submit.prevent="addPersones" v-bind:class="{ active: isActive }" class="addcontagent" >
@@ -65,11 +65,19 @@
 
   import axios from 'axios';
   let _self = this;
-  export default {
-    data: () => {
-      return ({
-        persones: [],
-        table: {},
+export default {
+    data()  {
+      return {
+        baze: [],
+        contragent: '',
+        adress: '',
+        telephone: '',
+        inn: '',
+        cash: '',
+        check: '',
+        datein: '',
+        worker: '',
+        number: '',
         isMainPage: false,
         signComplete: false,
         mastershets: [],
@@ -81,14 +89,13 @@
         counter: 0,
         isActive: true,
 
-      });
+      }
     },
-    mounted() {
-      let _self = this;
-      axios.get(`https://sheetdb.io/api/v1/5b493eaf48d9f`, `https://rustrade777-21b3f.firebaseio.com/.json?auth=l3CAhSR99eegs0ODaTRqxXmTMhbDypSajnP8jL68`)
+    created() {
+      axios.get('https://sheetdb.io/api/v1/5b493eaf48d9f', 'https://rustrade777-21b3f.firebaseio.com/.json?auth=l3CAhSR99eegs0ODaTRqxXmTMhbDypSajnP8jL68')
         .then(response => {
-          _self.table = response;
-          console.log(this.data);
+          this.baze = response.data;
+
         })
 
         .catch(e => {
@@ -96,6 +103,17 @@
 
         });
 
+    },
+    computed: {
+      filteredPersone: function() {
+        let search = (this.search || "").toLocaleLowerCase();
+        return this.baze.filter(function (persone){
+          let contrage = (persone.contragent || "").toLowerCase();
+          let worke = (persone.inn || "").toLowerCase();
+          return contrage.indexOf(search) > -1 || worke.indexOf(search) > -1
+        });
+
+      }
     },
     methods: {
       popup() {
@@ -108,17 +126,13 @@
 
 
       },
+
     },
-    computed: {
-      filteredBlogs() {
-        return this.table.data.filter((persone) => {
-          persone.push(this.search)
-          }
-        )
-      }
-    }
+
   }
 </script>
+
+
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 

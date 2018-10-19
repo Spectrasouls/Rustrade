@@ -1,18 +1,14 @@
+* {
+  box-sizing: border-box
+}
 
-*, :after, :before
-  box-sizing border-box
-body
-  margin 0
-.logo
-  text-align: left
-  font-size: 50px
-  text-transform: uppercase
-  color: #FFFF
+
+
 .login-wrap
   width 100%
   margin auto
   max-width 400px
-  min-height 520px
+  min-height 400px
   position relative
   top 100px
   box-shadow 0 12px 15px 0 rgba(0,0,0,.24),0 17px 50px 0 rgba(0,0,0,.19)
@@ -27,6 +23,7 @@ body
 
   .sign-in , .sign-up
     display none
+    color: #FF5535
 
   .sign-in:checked + .tab,
   .sign-up:checked + .tab
@@ -41,13 +38,11 @@ body
     margin 10px 15px 20px 0
     border-bottom 2px solid transparent
     text-transform uppercase
-    
+    color: #FF5535
+    font-weight: bold
 
   .sign-in-form, .sign-up-form
-    top 120px
-    left 50px
-    right 50px
-    position absolute
+    position: relative
 
     .input-group
       margin-bottom 15px
@@ -61,7 +56,7 @@ body
 
       .input
         width 100%
-        color default_color
+        color #FF5535
         display block
         border 1px solid  #B5BFB3
         padding 15px 20px
@@ -72,7 +67,7 @@ body
 
       .input:focus
         outline none
-        border 1px solid primary_color
+        border 1px solid #FF5535
 
     button
       text-transform uppercase

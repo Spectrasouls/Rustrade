@@ -1,8 +1,7 @@
 <template>
   <div>
-    <h1 class="logo">Rustrade</h1>
     <div class="login-wrap">
-      <input id="tabInput" type="radio" name="tab" class="sign-in" checked><label for="tabInput" class="tab">Вход</label>
+      <input id="tabInput" type="radio" name="tab" class="sign-in" checked><label for="tabInput" class="tab">Rustrade</label>
         <form  class="sign-in-form" @submit.prevent="enterUser">
           <div class="input-group">
             <label for="pass" class="label">Почта</label>

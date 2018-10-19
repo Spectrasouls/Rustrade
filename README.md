@@ -1,6 +1,6 @@
-# photofinder
+# rustrade
 
-> photo finder with vue
+> rustrade on vue
 
 ## Build Setup
 
